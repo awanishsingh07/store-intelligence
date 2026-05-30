@@ -47,7 +47,5 @@ async def ingest_events(
 
     # --- Business logic placeholder ---
     # TODO: call ingestion service to dedup + persist
-    # from app.services.ingestion import ingest_batch
-    # return await ingest_batch(db, events)
-
-    return IngestResponse(accepted=len(events), rejected=0, errors=[])
+    from app.services.ingestion import ingest_batch
+    return await ingest_batch(db, events)
