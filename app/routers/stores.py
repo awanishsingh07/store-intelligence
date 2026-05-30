@@ -8,6 +8,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.database import get_db
 from app.core.config import get_settings
 from app.services.metrics import compute_metrics
+from app.services.funnel import compute_funnel
 from app.schemas.events import (
     Anomaly,
     StoreAnomalies,
@@ -59,29 +60,8 @@ async def get_funnel(
     store_id: Annotated[str, Path()],
     db: Annotated[AsyncSession, Depends(get_db)],
 ) -> StoreFunnel:
-    """
-    Business logic: session-level aggregation. One visitor_id = one session.
-    Re-entry detected visitor uses the same session.
-    """
-    # --- Business logic placeholder ---
-    # TODO: from app.services.funnel import compute_funnel
-    # return await compute_funnel(db, store_id)
-
-    now = _now()
-    stages = [
-        FunnelStage(stage="ENTRY", count=0, drop_off_pct=0.0),
-        FunnelStage(stage="ZONE_VISIT", count=0, drop_off_pct=0.0),
-        FunnelStage(stage="BILLING_QUEUE", count=0, drop_off_pct=0.0),
-        FunnelStage(stage="PURCHASE", count=0, drop_off_pct=0.0),
-    ]
-    return StoreFunnel(
-        store_id=store_id,
-        stages=stages,
-        total_sessions=0,
-        window_start=now.replace(hour=0, minute=0, second=0, microsecond=0),
-        window_end=now,
-    )
-
+    
+    return await compute_funnel(db, store_id)
 
 @router.get(
     "/heatmap",
