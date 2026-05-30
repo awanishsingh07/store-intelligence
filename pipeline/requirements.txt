@@ -1,0 +1,10 @@
+# Detection pipeline dependencies
+# Install separately: pip install -r pipeline/requirements.txt
+
+ultralytics==8.2.0          # YOLOv8 + ByteTrack built-in
+opencv-python-headless==4.9.0.80
+numpy==1.26.4
+scipy==1.13.0               # IoU / trajectory similarity
+python-dotenv==1.0.1
+tqdm==4.66.4
+requests==2.31.0            # POST events to API

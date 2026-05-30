@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: store-intelligence-api
+    ports:
+      - "8000:8000"
+    volumes:
+      # SQLite database persists across restarts
+      - sqlite_data:/app/data
+      # Mount events output from pipeline for easy ingestion
+      - ./pipeline/output:/app/pipeline_output:ro
+    environment:
+      - DATABASE_URL=sqlite+aiosqlite:////app/data/store_intelligence.db
+      - LOG_LEVEL=INFO
+      - ENVIRONMENT=production
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+
+volumes:
+  sqlite_data:
+    driver: local
