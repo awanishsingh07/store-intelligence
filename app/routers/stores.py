@@ -7,6 +7,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.database import get_db
 from app.core.config import get_settings
+from app.services.metrics import compute_metrics
 from app.schemas.events import (
     Anomaly,
     StoreAnomalies,
@@ -40,25 +41,8 @@ async def get_metrics(
     store_id: Annotated[str, Path(description="Store identifier, e.g. STORE_BLR_002")],
     db: Annotated[AsyncSession, Depends(get_db)],
 ) -> StoreMetrics:
-    """
-    Business logic: will query events table filtered by store_id + today's date,
-    exclude is_staff=true, compute metrics.
-    """
-    # --- Business logic placeholder ---
-    # TODO: from app.services.metrics import compute_metrics
-    # return await compute_metrics(db, store_id)
-
-    now = _now()
-    return StoreMetrics(
-        store_id=store_id,
-        unique_visitors=0,
-        conversion_rate=0.0,
-        avg_dwell_per_zone=[],
-        current_queue_depth=0,
-        abandonment_rate=0.0,
-        window_start=now.replace(hour=0, minute=0, second=0, microsecond=0),
-        window_end=now,
-    )
+    
+    return await compute_metrics(db, store_id)
 
 
 @router.get(
