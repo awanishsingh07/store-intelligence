@@ -9,6 +9,8 @@ from app.core.database import get_db
 from app.core.config import get_settings
 from app.services.metrics import compute_metrics
 from app.services.funnel import compute_funnel
+from app.services.heatmap import compute_heatmap
+
 from app.schemas.events import (
     Anomaly,
     StoreAnomalies,
@@ -76,22 +78,9 @@ async def get_heatmap(
     store_id: Annotated[str, Path()],
     db: Annotated[AsyncSession, Depends(get_db)],
 ) -> StoreHeatmap:
-    """
-    Business logic: aggregate ZONE_ENTER counts + dwell_ms per zone,
-    normalise visit frequency to 0-100 range.
-    """
-    # --- Business logic placeholder ---
-    # TODO: from app.services.heatmap import compute_heatmap
-    # return await compute_heatmap(db, store_id)
-
-    now = _now()
-    return StoreHeatmap(
-        store_id=store_id,
-        zones=[],
-        window_start=now.replace(hour=0, minute=0, second=0, microsecond=0),
-        window_end=now,
-    )
-
+    
+    return await compute_heatmap(db, store_id)
+    
 
 @router.get(
     "/anomalies",
