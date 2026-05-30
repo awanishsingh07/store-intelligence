@@ -10,6 +10,7 @@ from app.core.config import get_settings
 from app.services.metrics import compute_metrics
 from app.services.funnel import compute_funnel
 from app.services.heatmap import compute_heatmap
+from app.services.anomalies import detect_anomalies
 
 from app.schemas.events import (
     Anomaly,
@@ -96,16 +97,5 @@ async def get_anomalies(
     store_id: Annotated[str, Path()],
     db: Annotated[AsyncSession, Depends(get_db)],
 ) -> StoreAnomalies:
-    """
-    Business logic: query last events per zone for dead zone detection,
-    compute live conversion rate and compare to store_baselines table.
-    """
-    # --- Business logic placeholder ---
-    # TODO: from app.services.anomalies import detect_anomalies
-    # return await detect_anomalies(db, store_id)
-
-    return StoreAnomalies(
-        store_id=store_id,
-        anomalies=[],
-        checked_at=_now(),
-    )
+    
+    return await detect_anomalies(db, store_id)
