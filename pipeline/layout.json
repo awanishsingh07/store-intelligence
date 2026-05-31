@@ -1,0 +1,19 @@
+{
+  "store_id": "STORE_001",
+  "cameras": {
+    "CAM_001": [
+      {
+        "zone_id": "ENTRY_ZONE",
+        "sku_zone": null,
+        "is_billing": false,
+        "polygon": [[0,0],[700,0],[700,700],[0,700]]
+      },
+      {
+        "zone_id": "BILLING_ZONE",
+        "sku_zone": null,
+        "is_billing": true,
+        "polygon": [[701,0],[1400,0],[1400,700],[701,700]]
+      }
+    ]
+  }
+}
