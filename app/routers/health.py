@@ -59,10 +59,13 @@ async def health_check(
         for store_id, last_event_at in rows:
             if last_event_at is None:
                 status = "NO_DATA"
-            elif last_event_at < stale_threshold:
-                status = "STALE_FEED"
             else:
-                status = "OK"
+                if last_event_at.tzinfo is None:
+                    last_event_at = last_event_at.replace(tzinfo=timezone.utc)
+                    if last_event_at < stale_threshold:
+                        status = "STALE_FEED"
+                    else : 
+                        status = "OK"
 
             store_statuses.append(
                 StoreFeedStatus(

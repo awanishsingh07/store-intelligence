@@ -69,6 +69,47 @@ store-intelligence/
 └── README.md
 ```
 
+### Validation Performed
+```
+The system was validated end-to-end using the provided CCTV footage and challenge dataset.
+
+Detection Pipeline Validation
+Successfully processed the provided CCTV footage (CAM 1.mp4) using YOLOv8n and ByteTrack.
+Generated structured retail events from tracked visitor movement.
+Produced visitor-level tracking IDs and session events.
+Verified event generation and JSONL output.
+API Validation
+Successfully ingested generated events through POST /events/ingest.
+Verified all analytics endpoints:
+GET /health
+GET /stores/{id}/metrics
+GET /stores/{id}/funnel
+GET /stores/{id}/heatmap
+GET /stores/{id}/anomalies
+Health Check Validation
+Verified database connectivity checks.
+Verified stale-feed detection logic.
+Confirmed healthy status after recent event ingestion.
+Sample Results
+Real CCTV footage processed successfully.
+Events generated and ingested into the API.
+Metrics endpoint returned visitor counts, conversion rate, and queue depth.
+Funnel endpoint returned stage-wise drop-off analytics.
+Docker deployment verified using docker compose up --build.
+Testing
+Automated test suite executed successfully.
+28 passed
+```
+
+### Environment
+Python 3.11
+FastAPI
+SQLite (WAL mode)
+Docker Compose
+YOLOv8n
+ByteTrack
+```
+
 ## Validation Screenshots
 
 ### Health Check
@@ -95,6 +136,10 @@ store-intelligence/
 
 ![Docker](docs/screenshots/docker.png)
 
+### End-to-End Pipeline Validation
+
+![Pipeline Validation](docs/screenshots/emit-cam1-success.png)
+
 ### Test Suite
 
 ![Tests](docs/screenshots/tests.png)
@@ -111,3 +156,4 @@ store-intelligence/
 
 See `docs/DESIGN.md` for full architecture overview and `docs/CHOICES.md` for
 key technical decisions.
+
