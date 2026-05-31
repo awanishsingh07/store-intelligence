@@ -69,6 +69,36 @@ store-intelligence/
 └── README.md
 ```
 
+## Validation Screenshots
+
+### Health Check
+
+![Health](docs/screenshots/health.png)
+
+### Metrics Endpoint
+
+![Metrics](docs/screenshots/metrics.png)
+
+### Funnel Endpoint
+
+![Funnel](docs/screenshots/funnel.png)
+
+### Heatmap Endpoint
+
+![Heatmap](docs/screenshots/heatmap.png)
+
+### Anomalies Endpoint
+
+![Anomalies](docs/screenshots/anomalies.png)
+
+### Docker Deployment
+
+![Docker](docs/screenshots/docker.png)
+
+### Test Suite
+
+![Tests](docs/screenshots/tests.png)
+
 ## Environment Variables
 
 | Variable | Default | Description |

@@ -17,9 +17,29 @@ infrastructure dependencies that would add operational complexity for no gain
 given the dataset size.
 
 ```
-CCTV clips → pipeline/detect.py → events.jsonl → POST /events/ingest → SQLite
-                                                                            ↓
-                                               GET /metrics, /funnel, /heatmap, /anomalies, /health
+CCTV Video
+     │
+     ▼
+YOLOv8 Detection
+     │
+     ▼
+ByteTrack Tracking
+     │
+     ▼
+Zone Mapping
+     │
+     ▼
+Event Generation
+     │
+     ▼
+POST /events/ingest
+     │
+     ▼
+SQLite (WAL)
+     │
+ ┌───┼─────────────┬─────────────┐
+ ▼   ▼             ▼             ▼
+Metrics  Funnel  Heatmap  Anomalies
 ```
 
 ### Component breakdown
@@ -90,4 +110,4 @@ you are solving."
 
 ---
 
-*Last updated: [date of submission]*
+*Last updated: [02.May.2026]*
