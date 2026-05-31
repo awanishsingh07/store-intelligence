@@ -102,6 +102,7 @@ Automated test suite executed successfully.
 ```
 
 ### Environment
+```
 Python 3.11
 FastAPI
 SQLite (WAL mode)
@@ -110,7 +111,7 @@ YOLOv8n
 ByteTrack
 ```
 
-## Validation Screenshots
+### Validation Screenshots
 
 ### Health Check
 
