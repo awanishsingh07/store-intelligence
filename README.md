@@ -158,3 +158,9 @@ ByteTrack
 See `docs/DESIGN.md` for full architecture overview and `docs/CHOICES.md` for
 key technical decisions.
 
+## Known Limitations
+```
+- Staff classification is not implemented in this prototype.
+- Zone dwell analytics require zone exit tracking and are partially implemented.
+- Store layout uses simplified analytics zones for demonstration purposes.
+```
