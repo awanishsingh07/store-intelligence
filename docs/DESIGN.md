@@ -110,4 +110,4 @@ you are solving."
 
 ---
 
-*Last updated: [02.May.2026]*
+*Last updated: [31.May.2026]*
