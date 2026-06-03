@@ -65,10 +65,10 @@ class TestIngestValidation:
         resp = await client.post("/events/ingest", json=[event])
         assert resp.status_code == 422
 
-    async def test_timestamp_without_timezone(self, client: AsyncClient):
+    async def test_timestamp_without_timezone_coerced_to_utc(self, client: AsyncClient):
         event = make_event(timestamp="2026-03-03T14:22:10")  # no tz
         resp = await client.post("/events/ingest", json=[event])
-        assert resp.status_code == 422
+        assert resp.status_code == 200
 
     async def test_empty_batch(self, client: AsyncClient):
         resp = await client.post("/events/ingest", json=[])
